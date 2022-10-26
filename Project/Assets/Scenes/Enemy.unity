@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.8
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.6
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.26666668
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 60038db3e038b57458532349556ba649, type: 2}
 --- !u!1001 &22634691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &461915957
 MeshCollider:
@@ -354,8 +354,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624749086}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.24810572, y: -0.31405783, z: 0.085398525, w: 0.91242445}
+  m_LocalPosition: {x: 7.389206, y: 4.6796303, z: -7.5182943}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 1362870823}
   - component: {fileID: 1362870824}
   m_Layer: 0
-  m_Name: EnemyManager
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,6 +500,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258fd42751546c4fbee3d0c22d60783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numObjects: 10
-  player: {fileID: 7582074838264419019, guid: f130c4ce10aa56f4da8c1bf117ae80ea, type: 3}
   enemyPrefab: {fileID: 1091186239720086303, guid: b9e0eb14fc67aa74bbdb51de66c4ff71, type: 3}
+  gameArea: {fileID: 461915956}
+  enemyCount: 0
+  enemyLimit: 25
+  enemyPerFrame: 1
+  spawnCircleRadius: 5
+  deathCircleRadius: 10
+  slowestSpeed: 5
+  fastestSpeed: 1

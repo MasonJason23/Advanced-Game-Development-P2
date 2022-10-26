@@ -174,9 +174,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7966495709235985266, guid: f130c4ce10aa56f4da8c1bf117ae80ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9040357794296622893, guid: f130c4ce10aa56f4da8c1bf117ae80ea, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040357794296622893, guid: f130c4ce10aa56f4da8c1bf117ae80ea, type: 3}
+      propertyPath: m_TagString
+      value: target
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f130c4ce10aa56f4da8c1bf117ae80ea, type: 3}
@@ -456,6 +464,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &1326348975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7582074838264419019, guid: f130c4ce10aa56f4da8c1bf117ae80ea, type: 3}
+  m_PrefabInstance: {fileID: 22634691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1362870821
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1091186239720086303, guid: b9e0eb14fc67aa74bbdb51de66c4ff71, type: 3}
   gameArea: {fileID: 461915956}
+  target: {fileID: 1326348975}
   enemyCount: 0
   enemyLimit: 25
   enemyPerFrame: 1

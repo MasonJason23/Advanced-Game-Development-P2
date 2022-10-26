@@ -24,6 +24,19 @@ public class PlaneGeneration : MonoBehaviour
 
     // Keeps a history of where our last position is so that duplicate plane generations won't be made.
     Hashtable tilePlane = new Hashtable();
+    
+    // Custom class to store each ground plane and with their relative timestamps upon creation
+    private class Tile
+    {
+        public float cTimestamp;
+        public GameObject tileObject;
+
+        public Tile(float cTimestamp, GameObject tileObject)
+        {
+            this.tileObject = tileObject;
+            this.cTimestamp = cTimestamp;
+        }
+    }
 
     void Update()
     {
@@ -42,23 +55,65 @@ public class PlaneGeneration : MonoBehaviour
     }
 
     // Helper function to reduce code duplication
+    // This is where the generation of ground planes take place
     private void GenerationHelper()
     {
+        // Used to keep a history of what tiles have been generated relative to player position and plane generation range
+        Hashtable newTiles = new Hashtable();
+        
+        // Used as a key for each ground plane on the hashtable
+        float cTime = Time.realtimeSinceStartup;
+        
         for (int x = -radius+1; x < radius; x++)
         {
             for (int z = -radius+1; z < radius; z++)
             {
+                // Used to check if a ground plane has been generated
                 Vector3 pos = new Vector3((x * planeOffset + XPlayerLocation),
                     0,
                     (z * planeOffset + ZPlayerLocation));
 
+                // if there is no ground plane in this position, generate one
                 if (!tilePlane.Contains(pos))
                 {
+                    // Generating new ground plane
                     GameObject tile = Instantiate(plane, pos, Quaternion.identity, parent.transform);
-                    tilePlane.Add(pos, tile);
+                    
+                    // Tile contains the specific ground plane game object and its timestamp.
+                    Tile t = new Tile(cTime, tile);
+                    
+                    // Ground plane added into "history"
+                    tilePlane.Add(pos, t);
+                }
+                // Update existing ground plane timestamp.
+                else
+                {
+                    ((Tile)tilePlane[pos]).cTimestamp = cTime;
                 }
             }
         }
+        
+        // Used to check if the ground plane is near the plane generation range
+        // Timestamps is used to keep track if the player has left the area
+        // If the timestamp of the ground plane equals the current time, then it is in range of the plane generator
+        // Otherwise it will "unload" itself
+        foreach (Tile t in tilePlane.Values)
+        {
+            if (!t.cTimestamp.Equals(cTime))
+            {
+                Destroy(t.tileObject);
+            }
+            else
+            {
+                newTiles.Add(t.tileObject, t);
+            }
+        }
+
+        // Updates our "history" hashtable of the existing ground planes
+        tilePlane = newTiles;
+        
+        // Updates current starting position since it is used to determine what ground planes should be "unloaded"
+        startPos = player.transform.position;
     }
 
     // Checks to make sure the player has moved

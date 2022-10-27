@@ -115,7 +115,6 @@ MonoBehaviour:
   enemySpawner: {fileID: 0}
   gameArea: {fileID: 0}
   target: {fileID: 0}
-  collider: {fileID: 0}
   speed: 0
 --- !u!195 &808969298470715481
 NavMeshAgent:

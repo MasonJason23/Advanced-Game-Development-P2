@@ -64,9 +64,9 @@ public class PlaneGeneration : MonoBehaviour
         // Used as a key for each ground plane on the hashtable
         float cTime = Time.realtimeSinceStartup;
         
-        for (int x = -radius+1; x < radius; x++)
+        for (int x = -radius; x < radius; x++)
         {
-            for (int z = -radius+1; z < radius; z++)
+            for (int z = -radius; z < radius; z++)
             {
                 // Used to check if a ground plane has been generated
                 Vector3 pos = new Vector3((x * planeOffset + XPlayerLocation),

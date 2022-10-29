@@ -8,10 +8,10 @@ public class PlaneGeneration : MonoBehaviour
     public GameObject plane, player, parent;
     
     // Relative to how far the environment from the player is generated
-    private int radius = 3;
+    [SerializeField] private int radius = 3;
     // Relative to how to separate each ground plane when generating new environment
     // 10 (plane offset) : 1 (ground plane size) relation
-    private int planeOffset = 50;
+    [SerializeField] private int planeOffset = 50;
 
     // Starting position, player gameObject must be at this location in order to generate the environment at the start
     private Vector3 startPos = Vector3.zero;

@@ -25,7 +25,7 @@ public class enemySCR : MonoBehaviour
     void Update()
     {
         //allows the enemy to move
-        Move();
+        // Move();
         //Makes the enemy target the player
         agent.SetDestination(target.position);
         

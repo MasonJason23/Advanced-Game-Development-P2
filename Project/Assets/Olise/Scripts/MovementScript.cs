@@ -36,6 +36,13 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
+
+        //transform.LookAt();
+
+    }
+
+    private void FixedUpdate()
+    {
         Cursor.visible = false;
         // Range [-1 - 1]
         horizontalInputVal = Input.GetAxisRaw("Horizontal"); 
@@ -50,27 +57,26 @@ public class MovementScript : MonoBehaviour
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
             // we added the camera y angle so ur target angle is based of the camera angle 
-             targetAngle   = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            targetAngle   = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
              
-             // This code just helps the player to smoothly turn to the target angle
-             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
-                 ref currentSmoothVelocity, turnSmoothningTime);
+            // This code just helps the player to smoothly turn to the target angle
+            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
+                ref currentSmoothVelocity, turnSmoothningTime);
             
             // rotate player to specified angle
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
             //moveDir takes into account the smooth rotation val and the rotation of our camera
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            rb.AddForce( (transform.forward.normalized +moveDir * speed)* Time.deltaTime, ForceMode.VelocityChange);
+            rb.AddForce( (transform.forward.normalized +moveDir * speed * Time.deltaTime ) , ForceMode.Force);
         }
         
         if (Input.GetButtonDown("Jump") && GroundCheck())
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-        }
-
+        } 
     }
-    
+
     bool GroundCheck()
     {
         if (Physics.BoxCast(transform.position, boxsize,
@@ -86,9 +92,9 @@ public class MovementScript : MonoBehaviour
         
     }
     
-    private void OnDrawGizmos() // used to show the box in the scene view
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position- transform.up *maxDistance, boxsize);
-    }
+    // private void OnDrawGizmos() // used to show the box in the scene view
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawCube(transform.position- transform.up *maxDistance, boxsize);
+    // }
 }

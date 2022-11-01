@@ -8,6 +8,7 @@ public class MouseCameraController : MonoBehaviour
     private Vector2 mousePos;
     public float mouseSensitivity;
     public Transform ParentTransform;
+    private Vector2 tempMousePos;
     void Start()
     {
         // Locks the cursor
@@ -25,8 +26,12 @@ public class MouseCameraController : MonoBehaviour
         Cursor.visible = false;
         mousePos.x += Input.GetAxis("Mouse X") * mouseSensitivity;
         mousePos.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
-        transform.localRotation = Quaternion.Euler(-mousePos.y,mousePos.x, 0);
-        ParentTransform.localRotation = Quaternion.Euler(ParentTransform.position.y,mousePos.x,
-            0);
+        
+        transform.localRotation = Quaternion.Euler(-mousePos.y,0, 0);
+      // ParentTransform.localRotation = Quaternion.Euler(ParentTransform.rotation.x,
+           // mousePos.x,
+           //  0);
+       tempMousePos = mousePos;
+
     }
 }

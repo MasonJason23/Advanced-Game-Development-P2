@@ -10,10 +10,12 @@ public class enemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject gameArea;
     public Transform target;
+    public float spawnTime = 2;
+    public float spawnDelay = 3;
     
     //This is for testing enemy spawning
     public int enemyCount = 0;
-    public int enemyLimit = 25;
+    public int enemyLimit = 5;
     public int enemyPerFrame = 1;
 
     //The top one is for the spawning circle and the bottom is for testing, will maybe keep it(?)
@@ -25,27 +27,27 @@ public class enemySpawner : MonoBehaviour
     public float fastestSpeed = 1f;
     private void Start()
     {
-
+        InvokeRepeating("MaintainPopulation",spawnTime,spawnDelay);
     }
 
     private void Update()
     {
         //we check every frame to make sure we have enough enemies this will have to be changed if we want enemies spawn rate to scale with time.
-        MaintainPopulation();
+        //MaintainPopulation();
     }
 
     void MaintainPopulation()
     {
         if (enemyCount < enemyLimit)//we check to make sure we don't go over our limit, this will probably not be needed later on
-        {
-            for (int i = 0; i < enemyPerFrame; i++)
             {
-                Vector3 position = GetRandomPosition(true); //we send a bool that shows if our enemy spawn positions would be in view 
-                enemySCR enemyScript = AddEnemy(position);
+                for (int i = 0; i < enemyPerFrame; i++)
+                {
+                    Vector3 position = GetRandomPosition(true); //we send a bool that shows if our enemy spawn positions would be in view 
+                    enemySCR enemyScript = AddEnemy(position);
                 
-                enemyScript.transform.Rotate(Vector3.forward * Random.Range(-45.0f,45.0f)); //this moves there spawning point to be closer but may not be needed 
+                    enemyScript.transform.Rotate(Vector3.forward * Random.Range(-45.0f,45.0f)); //this moves there spawning point to be closer but may not be needed 
+                }
             }
-        }
     }
 
     Vector3 GetRandomPosition(bool withinCamera)

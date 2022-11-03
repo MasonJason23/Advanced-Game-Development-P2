@@ -12,28 +12,44 @@ public class enemySCR : MonoBehaviour
     public enemySpawner enemySpawner;
     public GameObject gameArea;
     public Transform target;
-    private NavMeshAgent agent; //We need this for the navmesh 
 
     public float speed;
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         //allows the enemy to move
-        // Move();
+        Move(); 
         //Makes the enemy target the player
-        agent.SetDestination(target.position);
-        
     }
 
     void Move()
     {
-        transform.position += transform.up * (Time.deltaTime * speed);
+        /*
+         * "Ideally the enemy should face towards the player and then move towards that player depending on its unique speed"
+         * Pseudo Code
+         * (Facing towards the player)
+         * Can either use Transform.LookAt -> https://docs.unity3d.com/ScriptReference/Transform.LookAt.html
+         * or Quaternion look rotation -> https://docs.unity3d.com/ScriptReference/Quaternion.LookRotation.html
+         * (Moving towards the player)
+         * transform.position = transform.forwards * delta time * speed
+         */
+        
+        //Attempting to look at player, happens every frame since its in update currently 
+        
+        //TODO 1: Change look at to quaternion, if it still allows eneimies to float look for other solutions
+        
+        //TODO 2: Didn't like the quaternion doc on unity, will change it to something else 
+        //Vector3 relativePos = target.position - transform.position;
+        //Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        transform.LookAt(new Vector3(target.position.x, 0.154f,target.position.z)); //this works but enemies are stuck in the ground for rn 
+
+        transform.position += transform.forward * (Time.deltaTime * speed);
 
         float distance = Vector3.Distance(transform.position, gameArea.transform.position);
         //If the enemy is too far off the plane then the enemy is destroyed 

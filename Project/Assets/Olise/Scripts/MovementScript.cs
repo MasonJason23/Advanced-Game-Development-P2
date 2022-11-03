@@ -71,7 +71,7 @@ public class MovementScript : MonoBehaviour
             rb.AddForce( (transform.forward.normalized +moveDir * speed * Time.deltaTime ) , ForceMode.Force);
         }
         
-        if (Input.GetButtonDown("Jump") && GroundCheck())
+        if (Input.GetButton("Jump") && GroundCheck())
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         } 

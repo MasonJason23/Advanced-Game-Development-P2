@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2226969580504807576}
   - component: {fileID: 9207513161958025768}
   - component: {fileID: 5995085837111702024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: InvisibleRoof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6906825252587696796}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoofParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}

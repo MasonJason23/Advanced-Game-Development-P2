@@ -8,6 +8,10 @@ public class PlaneGeneration : MonoBehaviour
 {
     // Reference to plane and self. Player reference must be dragged on.
     [SerializeField] private GameObject plane, player, parent, wall, roof;
+
+    // Timers to determine when to update the invisible walls/roof position
+    [SerializeField] private float updateWallPosTimer = 5f;
+    private float wallPosTimer;
     
     // Relative to how far the environment from the player is generated
     private int radius = 5;
@@ -32,6 +36,7 @@ public class PlaneGeneration : MonoBehaviour
         
         private int invisibleWallRange;
 
+        // Constructor
         public InvisibleWalls(GameObject self, GameObject wall, GameObject roof, int radius, int planeOffset, int XPlayerLocation, int ZPlayerLocation)
         {
             invisibleWallRange = radius * planeOffset;
@@ -48,7 +53,7 @@ public class PlaneGeneration : MonoBehaviour
             
             invisRoof = Instantiate(roof, new Vector3(0f, invisibleWallRange / 2f, 0f), Quaternion.identity, self.transform);
         }
-
+        
         public void UpdateWallPositions(int XPlayerLocation, int ZPlayerLocation)
         {
             float leftRange = XPlayerLocation - invisibleWallRange;
@@ -99,15 +104,23 @@ public class PlaneGeneration : MonoBehaviour
 
     private void Start()
     {
+        wallPosTimer = updateWallPosTimer;
         invisibleWalls = new InvisibleWalls(gameObject, wall, roof, radius, planeOffset, XPlayerLocation, ZPlayerLocation);
+        invisibleWalls.UpdateWallPositions(XPlayerLocation, ZPlayerLocation);
+        invisibleWalls.UpdateRoofPosition(XPlayerLocation, ZPlayerLocation);
     }
 
     void Update()
     {
-        GenerateWorld();
+        wallPosTimer -= Time.deltaTime;
+        if (wallPosTimer < 0f)
+        {
+            invisibleWalls.UpdateWallPositions(XPlayerLocation, ZPlayerLocation);
+            invisibleWalls.UpdateRoofPosition(XPlayerLocation, ZPlayerLocation);
+            wallPosTimer = updateWallPosTimer;
+        }
         
-        invisibleWalls.UpdateWallPositions(XPlayerLocation, ZPlayerLocation);
-        invisibleWalls.UpdateRoofPosition(XPlayerLocation, ZPlayerLocation);
+        GenerateWorld();
     }
 
     // World generation from starting point and when player moves

@@ -104,6 +104,7 @@ public class MovementScript : MonoBehaviour
             jumpBoostWindow -= Time.deltaTime;
         }
         
+
         //CoyoteTime is always > 0 when player is on the ground
         //jumpBufferCounter > 0 when jump button is pressed
         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)

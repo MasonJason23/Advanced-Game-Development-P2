@@ -275,7 +275,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4944e2c33c99f9f46a4796e2e746213e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   jumpForce: 5
   speed: 50
   cam: {fileID: 0}
-  boxsize: {x: 0.69, y: 0.09, z: 0.96}
+  boxsize: {x: 0.69, y: 0.03, z: 0.96}
   maxDistance: 1.03
   turnSmoothningTime: 0.1
   LayerMask:

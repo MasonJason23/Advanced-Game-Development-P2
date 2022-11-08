@@ -446,7 +446,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 177617409}
-  m_LocalRotation: {x: 0.09067656, y: 0.000000017662869, z: -0.0000000016082332, w: 0.9958804}
+  m_LocalRotation: {x: 0.09067658, y: -0.000000017662865, z: 0.0000000016082332, w: 0.9958804}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -685,7 +685,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5e148de6cdf2d164aa3e3f90ce8c852c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -807,7 +807,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884676996}
-  m_LocalRotation: {x: 0.07254701, y: -0.000000008580521, z: 6.241358e-10, w: 0.997365}
+  m_LocalRotation: {x: 0.07254701, y: 0.000000008580521, z: -6.241358e-10, w: 0.997365}
   m_LocalPosition: {x: 0.7, y: 2.627, z: -72.090004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -902,7 +902,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5e148de6cdf2d164aa3e3f90ce8c852c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1143,7 +1143,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772036558}
-  m_LocalRotation: {x: 0.07254702, y: -0.000000004290261, z: 3.1206795e-10, w: 0.997365}
+  m_LocalRotation: {x: 0.07254702, y: 0.0000000042902606, z: -3.120679e-10, w: 0.997365}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1205,7 +1205,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5e148de6cdf2d164aa3e3f90ce8c852c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1400,6 +1400,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 884676999}
+    - target: {fileID: 1780023519513515204, guid: af3315d0c4e31a248bd3ff1dc0f2b8b3, type: 3}
+      propertyPath: jumpBoost
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780023519513515204, guid: af3315d0c4e31a248bd3ff1dc0f2b8b3, type: 3}
+      propertyPath: jumpBoostForce
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1780023519513515208, guid: af3315d0c4e31a248bd3ff1dc0f2b8b3, type: 3}
       propertyPath: m_RootOrder
       value: 5

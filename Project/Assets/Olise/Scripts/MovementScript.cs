@@ -39,26 +39,49 @@ public class MovementScript : MonoBehaviour
     private float jumpBoostWindow; 
     private Vector3 moveDir;
     // keeps track of if player is in the air
-    private bool onair; 
+    private bool onair;
 
 
-
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Locks the cursor
+        
     }
 
     void Update()
     {
        onair=  !GroundCheck();
+       // Debug.Log("JUMPbUFFER: "+jumpBufferCounter);
+       // Debug.Log("cayotee:" + coyoteTimeCounter);
+       
+       if (Input.GetButtonDown("Jump"))
+       {
+           // set JumBuffer Window time
+           jumpBufferCounter = jumpBufferTime; 
+           if (onair)
+           {
+               //set jumpBoost window time
+               jumpBoostWindow = 0.2f; // same time as the jumpBufferTime
+           }
+       }
+       else
+       {
+           jumpBufferCounter -= Time.deltaTime;
+           jumpBoostWindow -= Time.deltaTime;
+       }
+       
     }
 
     private void FixedUpdate()
     {
-        // Locks the cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
         
         // Range [-1 - 1]
         horizontalInputVal = Input.GetAxisRaw("Horizontal"); 
@@ -87,22 +110,7 @@ public class MovementScript : MonoBehaviour
             rb.AddForce( (transform.forward.normalized +moveDir * speed * Time.deltaTime ) , ForceMode.Force);
         }
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            // set JumBuffer Window time
-            jumpBufferCounter = jumpBufferTime; 
-            
-            if (onair)
-            {
-                //set jumpBoost window time
-                jumpBoostWindow = 0.2f; // same time as the jumpBufferTime
-            }
-        }
-        else
-        {
-            jumpBufferCounter -= Time.deltaTime;
-            jumpBoostWindow -= Time.deltaTime;
-        }
+        
         
 
         //CoyoteTime is always > 0 when player is on the ground

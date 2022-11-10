@@ -27,6 +27,10 @@ public class enemySpawner : MonoBehaviour
     public float fastestSpeed = 1f;
 
     public float enemyCost = 2; //This is for testing the directorFast
+    
+    //TODO 1: Change spawning from population based to enemies purchased 
+    //TODO 2: Make the spawning based on director i.e fast/slow 
+    
     private void Start()
     {
         //InvokeRepeating("MaintainPopulation",spawnTime,spawnDelay);

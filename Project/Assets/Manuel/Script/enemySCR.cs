@@ -69,7 +69,7 @@ public class enemySCR : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("We hit something");
+        //Debug.Log("We hit something");
         //we destroy the enemy if it only collides with the target 
         if (collision.gameObject.CompareTag("target"))
         {

@@ -66,12 +66,10 @@ public class directorFast : MonoBehaviour
         {
             spawnTimer += 4.01f;
         }
-        else
-        {
-            for (int i = 0; i < credits/EnemySpawner.enemyCost; i++)
-            {
-                spawn();
-            }
+        else{
+            spawn();
         }
-    }
+    }   
+    
 }
+    

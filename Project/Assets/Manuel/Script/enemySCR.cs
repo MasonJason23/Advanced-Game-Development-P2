@@ -12,6 +12,7 @@ public class enemySCR : MonoBehaviour
     public enemySpawner enemySpawner;
     public GameObject gameArea;
     public Transform target;
+    public float enemyCost = 1.0f;
 
     public float speed;
     // Start is called before the first frame update

@@ -25,15 +25,27 @@ public class enemySpawner : MonoBehaviour
     //Speeds for testing 
     public float slowestSpeed = 10f;
     public float fastestSpeed = 1f;
+
+    public float enemyCost = 2; //This is for testing the directorFast
     private void Start()
     {
-        InvokeRepeating("MaintainPopulation",spawnTime,spawnDelay);
+        //InvokeRepeating("MaintainPopulation",spawnTime,spawnDelay);
     }
 
     private void Update()
     {
         //we check every frame to make sure we have enough enemies this will have to be changed if we want enemies spawn rate to scale with time.
         //MaintainPopulation();
+    }
+
+    void OnEnable()
+    {
+        directorFast.spawn += MaintainPopulation;
+    }
+
+    void onDisable()
+    {
+        directorFast.spawn -= MaintainPopulation;
     }
 
     void MaintainPopulation()

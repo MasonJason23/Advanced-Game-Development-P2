@@ -12,6 +12,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private LayerMask focusLayer;
     // Reference to the player's position
     [SerializeField] private Transform playerTransform;
+    // Reference to projectile game object
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform projectileSpawnPosition;
     
     // Used to move the "debug sphere" game object
     [SerializeField] private Transform debugTransform;
@@ -28,13 +31,22 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         DebugMousePosition();
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
     }
 
-    // TODO Implementing shooting
     void Shoot()
     {
-        Ray cameraRay = mainCamera.ScreenPointToRay(_screenCenterPoint);
-        // Implement Invisible walls first inside PlaneGeneration script
+        // Ray ray = mainCamera.ScreenPointToRay(_screenCenterPoint);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, focusLayer))
+        {
+            Vector3 aimDir = (hit.point - projectileSpawnPosition.position).normalized;
+            Instantiate(projectile, projectileSpawnPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+        }
     }
 
     // This function places a debug game object wherever the mouse position is located

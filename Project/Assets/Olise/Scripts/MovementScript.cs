@@ -40,6 +40,8 @@ public class MovementScript : MonoBehaviour
     private Vector3 moveDir;
     // keeps track of if player is in the air
     private bool onair;
+    private AudioSource myspeaker;
+    public AudioClip jumpSound;
 
 
     private void Awake()
@@ -51,8 +53,9 @@ public class MovementScript : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // Locks the cursor
+        myspeaker = GetComponent<AudioSource>();
         
+
     }
 
     void Update()
@@ -96,7 +99,7 @@ public class MovementScript : MonoBehaviour
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
             // we added the camera y angle so ur target angle is based of the camera angle 
-            targetAngle   = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+             targetAngle   = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
              
             // This code just helps the player to smoothly turn to the target angle
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
@@ -123,9 +126,10 @@ public class MovementScript : MonoBehaviour
             //  For the jump Boost
             if ((horizontalInputVal != 0 || verticalInputVal != 0) && jumpBoostWindow > 0)
             {
+                myspeaker.PlayOneShot(jumpSound);
                 Debug.Log("jumpBoost!");
                 rb.AddForce( (new Vector3(moveDir.normalized.x  * jumpBoostForce, 
-                    0, moveDir.normalized.z * jumpBoostForce) ), ForceMode.VelocityChange );
+                    0, moveDir.normalized.z * jumpBoostForce) ), ForceMode.Force );
                 
                 // so it doesn't jump boost forever
                 jumpBoostWindow = 0f; 

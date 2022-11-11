@@ -42,6 +42,10 @@ public class MovementScript : MonoBehaviour
     private bool onair;
     private AudioSource myspeaker;
     public AudioClip jumpSound;
+    private float timer;
+    private float time = 0.8f;
+
+    
 
 
     private void Awake()
@@ -60,26 +64,32 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
-       onair=  !GroundCheck();
-       // Debug.Log("JUMPbUFFER: "+jumpBufferCounter);
-       // Debug.Log("cayotee:" + coyoteTimeCounter);
-       
-       if (Input.GetButtonDown("Jump"))
-       {
-           // set JumBuffer Window time
-           jumpBufferCounter = jumpBufferTime; 
-           if (onair)
-           {
-               //set jumpBoost window time
-               jumpBoostWindow = 0.2f; // same time as the jumpBufferTime
-           }
-       }
-       else
-       {
-           jumpBufferCounter -= Time.deltaTime;
-           jumpBoostWindow -= Time.deltaTime;
-       }
-       
+        onair = !GroundCheck();
+        // Debug.Log("JUMPbUFFER: "+jumpBufferCounter);
+        // Debug.Log("cayotee:" + coyoteTimeCounter);
+        timer += Time.deltaTime;
+
+        if (timer >= time)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+
+                // set JumBuffer Window time
+                jumpBufferCounter = jumpBufferTime;
+                if (onair)
+                {
+                    timer = 0;
+                    //set jumpBoost window time
+                    jumpBoostWindow = 0.2f; // same time as the jumpBufferTime
+                }
+            }
+            else
+            {
+                jumpBufferCounter -= Time.deltaTime;
+                jumpBoostWindow -= Time.deltaTime;
+            }
+
+        }
     }
 
     private void FixedUpdate()
@@ -124,15 +134,15 @@ public class MovementScript : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             
             //  For the jump Boost
-            if ((horizontalInputVal != 0 || verticalInputVal != 0) && jumpBoostWindow > 0)
+            if ((horizontalInputVal != 0 || verticalInputVal != 0) && jumpBoostWindow > 0 )
             {
+                // so it doesn't jump boost forever
+                jumpBoostWindow = 0f; 
                 myspeaker.PlayOneShot(jumpSound);
-                Debug.Log("jumpBoost!");
                 rb.AddForce( (new Vector3(moveDir.normalized.x  * jumpBoostForce, 
                     0, moveDir.normalized.z * jumpBoostForce) ), ForceMode.Force );
                 
-                // so it doesn't jump boost forever
-                jumpBoostWindow = 0f; 
+                
             }
             //so it doesn't jump forever
             jumpBufferCounter = 0f; 

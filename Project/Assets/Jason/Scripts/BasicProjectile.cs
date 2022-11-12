@@ -6,6 +6,7 @@ using UnityEngine;
 public class BasicProjectile : MonoBehaviour
 {
     private Rigidbody rb;
+    private float despawnTimer = 5f;
     
     private void Awake()
     {
@@ -16,6 +17,12 @@ public class BasicProjectile : MonoBehaviour
     {
         float speed = 30f;
         rb.velocity = transform.forward * speed;
+    }
+
+    private void Update()
+    {
+        despawnTimer -= Time.deltaTime;
+        if (despawnTimer < 0) Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

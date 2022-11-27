@@ -77,32 +77,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        public float[] getAbilityStats(int i)
-        {
-            if (i == 1)
-            {
-                return this.abilityStats[1];
-            }
-            else if (i == 2)
-            {
-                return this.abilityStats[2];
-            }
-            else if (i == 3)
-            {
-                return this.abilityStats[3];
-            }
-            else if (i == 4)
-            {
-                return this.abilityStats[4];
-            }
-            else
-            {
-                Debug.Log("getA1Stats: Wrong integer passed");
-                return new float[] {0, 0};
-            }
-        }
-
-        public float abilityTimer(int i)
+        public float getAbilityTimer(int i)
         {
             if (i == 1)
             {
@@ -124,6 +99,30 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("abilityTimer: Wrong integer passed");
                 return -1;
+            }
+        }
+        
+        public void setAbilityTimer(int i)
+        {
+            if (i == 1)
+            {
+                this.cdTimer1 = this.abilityStats[i][1];
+            }
+            else if (i == 2)
+            {
+                this.cdTimer2 = this.abilityStats[i][1];
+            }
+            else if (i == 3)
+            {
+                this.cdTimer3 = this.abilityStats[i][1];
+            }
+            else if (i == 4)
+            {
+                this.cdTimer4 = this.abilityStats[i][1];
+            }
+            else
+            {
+                Debug.Log("setAbilityTimer: Wrong integer passed");
             }
         }
         
@@ -150,6 +149,31 @@ public class GameManager : MonoBehaviour
                 Debug.Log("reduceAbilityTimer: Wrong integer passed");
             }
         }
+        
+        public float getAbilityTierLevel(int i)
+        {
+            if (i == 1)
+            {
+                return this.abilityStats[i][0];
+            }
+            else if (i == 2)
+            {
+                return this.abilityStats[i][0];
+            }
+            else if (i == 3)
+            {
+                return this.abilityStats[i][0];
+            }
+            else if (i == 4)
+            {
+                return this.abilityStats[i][0];
+            }
+            else
+            {
+                Debug.Log("getA1Stats: Wrong integer passed");
+                return -1;
+            }
+        }
     }
     
     // Game timer
@@ -173,6 +197,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        DebuggingAbility();
+        
         // Updating game timer every frame
         gameTimer += Time.deltaTime;
 
@@ -185,37 +211,47 @@ public class GameManager : MonoBehaviour
         if (_abilityClass.isAbilityActive(1))
         {
             _abilityClass.reduceAbilityTimer(1);
-            if (_abilityClass.abilityTimer(1) <= 0f)
+            if (_abilityClass.getAbilityTimer(1) <= 0f)
             {
-                PlayerAbilities.Explosion(player.transform, _abilityClass.getAbilityStats(1));
+                PlayerAbilities.Explosion(player.transform, _abilityClass.getAbilityTierLevel(1));
             }
         }
         
         if (_abilityClass.isAbilityActive(2))
         {
             _abilityClass.reduceAbilityTimer(2);
-            if (_abilityClass.abilityTimer(2) <= 0f)
+            if (_abilityClass.getAbilityTimer(2) <= 0f)
             {
-                PlayerAbilities.Orb(player.transform, _abilityClass.getAbilityStats(2));
+                PlayerAbilities.Orb(player.transform, _abilityClass.getAbilityTierLevel(2));
             }
         }
         
         if (_abilityClass.isAbilityActive(3))
         {
             _abilityClass.reduceAbilityTimer(3);
-            if (_abilityClass.abilityTimer(3) <= 0f)
+            if (_abilityClass.getAbilityTimer(3) <= 0f)
             {
-                PlayerAbilities.Aura(player.transform, _abilityClass.getAbilityStats(3));
+                PlayerAbilities.Aura(player.transform, _abilityClass.getAbilityTierLevel(3));
             }
         }
         
         if (_abilityClass.isAbilityActive(4))
         {
             _abilityClass.reduceAbilityTimer(4);
-            if (_abilityClass.abilityTimer(4) <= 0f)
+            if (_abilityClass.getAbilityTimer(4) <= 0f)
             {
-                PlayerAbilities.Lighting(player.transform, _abilityClass.getAbilityStats(4));
+                PlayerAbilities.Lighting(player.transform, _abilityClass.getAbilityTierLevel(4));
             }
         }
+    }
+
+    private void DebuggingAbility()
+    {
+        // if (Input.GetButtonDown("Fire2"))
+        // {
+        //     PlayerAbilities.Explosion(player.transform, 1);
+        //     PlayerAbilities.Explosion(player.transform, 2);
+        //     PlayerAbilities.Explosion(player.transform, 3);
+        // }
     }
 }

@@ -228,11 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5dc62535b4d3c478833de941acb18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  credits: 0
   EnemySpawner: {fileID: 36288104}
   creditsPerSecond: 0
   creditMulitplayer: 1
-  testing: 1
   spawnTimer: 0
+  fastChecker: 0
   elapsed: 0
 --- !u!4 &247142835
 Transform:
@@ -302,7 +303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8d530ffe6c4968843806085897955b9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -589,6 +590,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1326348975}
+    - target: {fileID: 7781630975826491534, guid: 3f8f5b8f41ab57240a9ce35a8f3a8f1c, type: 3}
+      propertyPath: xpOrbs
+      value: 
+      objectReference: {fileID: 255174554230187770, guid: 93ca25b541679344882d2f2e419f4936, type: 3}
     - target: {fileID: 7781630975826491534, guid: 3f8f5b8f41ab57240a9ce35a8f3a8f1c, type: 3}
       propertyPath: gameArea
       value: 

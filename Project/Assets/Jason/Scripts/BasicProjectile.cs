@@ -25,7 +25,7 @@ public class BasicProjectile : MonoBehaviour
         if (despawnTimer < 0) Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
     }

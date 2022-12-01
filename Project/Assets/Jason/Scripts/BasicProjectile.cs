@@ -15,7 +15,7 @@ public class BasicProjectile : MonoBehaviour
 
     private void Start()
     {
-        float speed = 30f;
+        float speed = 50f; //changed
         rb.velocity = transform.forward * speed;
     }
 

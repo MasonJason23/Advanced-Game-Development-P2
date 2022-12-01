@@ -25,8 +25,12 @@ public class BasicProjectile : MonoBehaviour
         if (despawnTimer < 0) Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.transform.tag.Equals("Enemy"))
+        {
+            other.gameObject.GetComponent<enemySCR>().takeDamage(25);
+        }
         Destroy(gameObject);
     }
 }

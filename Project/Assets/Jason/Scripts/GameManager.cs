@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
         _abilityClass = new AbilityClass();
 
+        _abilityClass.a1 = true;
         _abilityClass.hasAbilities = true;
         PlayerAbilities.Orb(player.transform, 1);
     }

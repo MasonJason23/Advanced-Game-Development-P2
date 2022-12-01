@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1091186239720086303, guid: b9e0eb14fc67aa74bbdb51de66c4ff71, type: 3}
-  gameArea: {fileID: 0}
+  xpOrbs: {fileID: 0}
   target: {fileID: 0}
+  spawnTime: 2
+  spawnDelay: 3
   enemyCount: 0
   enemyLimit: 25
   enemyPerFrame: 1
@@ -54,3 +56,4 @@ MonoBehaviour:
   deathCircleRadius: 10
   slowestSpeed: 5
   fastestSpeed: 1
+  enemyCost: 2

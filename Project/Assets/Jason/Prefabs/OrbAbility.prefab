@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 1534443142970222821}
   - component: {fileID: 1534443142970222820}
   - component: {fileID: 1534443142970222823}
+  - component: {fileID: 2204640145981908554}
   m_Layer: 0
   m_Name: Orb (1)
   m_TagString: Untagged
@@ -84,7 +85,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1534443142555788512}
   m_RootOrder: 1
@@ -168,6 +169,18 @@ MonoBehaviour:
   orbitDistance: 10
   orbitDegreesPerSec: 180
   relativeDistance: {x: 0, y: 0, z: 0}
+--- !u!114 &2204640145981908554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534443142970222817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5066650d577f34ba139cba33d2feef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1534443144482248081
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +194,7 @@ GameObject:
   - component: {fileID: 1534443144482248085}
   - component: {fileID: 1534443144482248084}
   - component: {fileID: 1534443144482248087}
+  - component: {fileID: 9043270593361863791}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
@@ -198,7 +212,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1534443142555788512}
   m_RootOrder: 0
@@ -282,6 +296,18 @@ MonoBehaviour:
   orbitDistance: 10
   orbitDegreesPerSec: 180
   relativeDistance: {x: 0, y: 0, z: 0}
+--- !u!114 &9043270593361863791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534443144482248081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5066650d577f34ba139cba33d2feef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1534443144520302578
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +321,7 @@ GameObject:
   - component: {fileID: 1534443144520302582}
   - component: {fileID: 1534443144520302577}
   - component: {fileID: 1534443144520302576}
+  - component: {fileID: 5339074009811686454}
   m_Layer: 0
   m_Name: Orb (2)
   m_TagString: Untagged
@@ -312,7 +339,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1534443142555788512}
   m_RootOrder: 2
@@ -396,6 +423,18 @@ MonoBehaviour:
   orbitDistance: 10
   orbitDegreesPerSec: 180
   relativeDistance: {x: 0, y: 0, z: 0}
+--- !u!114 &5339074009811686454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534443144520302578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5066650d577f34ba139cba33d2feef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1534443144530387082
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +448,7 @@ GameObject:
   - component: {fileID: 1534443144530387086}
   - component: {fileID: 1534443144530387081}
   - component: {fileID: 1534443144530387080}
+  - component: {fileID: 7330060848400241162}
   m_Layer: 0
   m_Name: Orb (3)
   m_TagString: Untagged
@@ -426,7 +466,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1534443142555788512}
   m_RootOrder: 3
@@ -510,3 +550,15 @@ MonoBehaviour:
   orbitDistance: 10
   orbitDegreesPerSec: 180
   relativeDistance: {x: 0, y: 0, z: 0}
+--- !u!114 &7330060848400241162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534443144530387082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5066650d577f34ba139cba33d2feef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

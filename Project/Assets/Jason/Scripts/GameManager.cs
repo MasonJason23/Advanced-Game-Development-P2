@@ -247,11 +247,12 @@ public class GameManager : MonoBehaviour
 
     private void DebuggingAbility()
     {
-        // if (Input.GetButtonDown("Fire2"))
-        // {
-        //     PlayerAbilities.Explosion(player.transform, 1);
-        //     PlayerAbilities.Explosion(player.transform, 2);
-        //     PlayerAbilities.Explosion(player.transform, 3);
-        // }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            // PlayerAbilities.Explosion(player.transform, 1);
+            // PlayerAbilities.Explosion(player.transform, 2);
+            // PlayerAbilities.Explosion(player.transform, 3);
+            // PlayerAbilities.Orb(player.transform, 1);
+        }
     }
 }

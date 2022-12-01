@@ -6,7 +6,10 @@ using UnityEngine;
 public class PlayerAbilities : MonoBehaviour
 {
     public GameObject explosion;
+    public GameObject orbs;
     
+    private GameObject activeOrbs;
+
     public void Explosion(Transform playerT, float tierLevel)
     {
         // Create explosion based on tier level given
@@ -20,6 +23,19 @@ public class PlayerAbilities : MonoBehaviour
     public void Orb(Transform playerT, float tierLevel)
     {
         // Create rotating orbs around the player that damages enemies based on tier level
+        if ((int)tierLevel == 1)
+        {
+            activeOrbs = Instantiate(orbs, playerT.position, Quaternion.identity, playerT);
+            activeOrbs.GetComponent<OrbsAbility>().ActivateOrbs(playerT);
+        }
+        else if (tierLevel < 4)
+        {
+            activeOrbs.GetComponent<OrbsAbility>().ActivateOrb();
+        }
+        else
+        {
+            Debug.Log("Create function to upgrade orb stats");
+        }
     }
 
     public void Aura(Transform playerT, float tierLevel)

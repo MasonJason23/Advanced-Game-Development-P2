@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,7 @@ public class enemySpawner : MonoBehaviour
     //enemy prefab, and the object for the map
     public GameObject enemyPrefab;
     public GameObject gameArea;
+    public GameObject xpOrbs;
     public Transform target;
     public float spawnTime = 2;
     public float spawnDelay = 3;
@@ -69,7 +71,7 @@ public class enemySpawner : MonoBehaviour
     Vector3 GetRandomPosition(bool withinCamera)
     {
         Vector3 position = Random.insideUnitCircle.normalized; //This will push enemies to the edge of the circle, later on may add some random number to move them either closer to further from the edge of the circle.
-        
+
         //This makes there spawning be on y axis of 0 but there z position is equal to the random value we normalized 
         position = new Vector3(position.x, 0, position.y);
         
@@ -79,8 +81,8 @@ public class enemySpawner : MonoBehaviour
             position = position.normalized;
         }
 
-        position *= spawnCircleRadius;
-        position += gameArea.transform.position;
+        position *= spawnCircleRadius; //This influences the spawning radius 
+        position += target.transform.position; //This focus 
         
         return position;
     }
@@ -99,6 +101,7 @@ public class enemySpawner : MonoBehaviour
         enemyScript.enemySpawner = this; //This just gives it this script, giving them access to one another 
         enemyScript.gameArea = gameArea; //Placing the gameArea(plane) to the enemyPrefab script
         enemyScript.target = target; //This is also needed for the nav mesh, the target is the player prefab 
+        enemyScript.xpOrbs = xpOrbs;
         enemyScript.speed = Random.Range(slowestSpeed, fastestSpeed); //This is the speed range although its probably too fast rn 
 
         return enemyScript;

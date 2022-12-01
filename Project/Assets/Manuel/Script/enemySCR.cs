@@ -13,6 +13,7 @@ public class enemySCR : MonoBehaviour
     public GameObject gameArea;
     public Transform target;
     public float enemyCost = 1.0f;
+    public int hp = 100; 
 
     public float speed;
     // Start is called before the first frame update
@@ -56,7 +57,7 @@ public class enemySCR : MonoBehaviour
         //If the enemy is too far off the plane then the enemy is destroyed 
         if (distance > enemySpawner.deathCircleRadius)
         {
-            RemoveEnemy();
+            //RemoveEnemy();
         }
     }
 
@@ -76,5 +77,10 @@ public class enemySCR : MonoBehaviour
             Destroy(gameObject);
             enemySpawner.enemyCount -= 1;
         }
+    }
+
+    public void takeDamage(int value)
+    {
+        
     }
 }

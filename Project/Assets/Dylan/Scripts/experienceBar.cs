@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class experienceBar: MonoBehaviour
     private float targetProgress = 0;
     public int level = 1;
     private int currentExperience = 0;
-    
+    public TMP_Text levelNumber;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,7 +36,8 @@ public class experienceBar: MonoBehaviour
         {
             slider.value += fillSpeed * Time.deltaTime;
         }
-        
+
+        levelNumber.text = level.ToString();
     }
 
     public void IncrementExperience(int experience)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class heartsAndSheilds : MonoBehaviour
@@ -8,6 +9,7 @@ public class heartsAndSheilds : MonoBehaviour
     public int shield = 3;
     public GameObject[] hearts;
     public GameObject[] shields;
+
     
     // Start is called before the first frame update
     void Start()

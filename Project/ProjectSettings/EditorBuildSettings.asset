@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Dylan/Scenes/testplay.unity
+    guid: 71474ea84caf01f488e8c6261e3d27fc
+  - enabled: 1
+    path: Assets/Dylan/Scenes/menu.unity
+    guid: a464790943e81194f8644234cfef3c49
+  - enabled: 1
+    path: Assets/Dylan/Scenes/ui.unity
+    guid: 509538f0ac05fb74e9e84e9876881cb5
   m_configObjects: {}

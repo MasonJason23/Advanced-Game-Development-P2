@@ -1,47 +1,63 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class experienceBar: MonoBehaviour
 {
     private Slider slider;
-    private ParticleSystem particleSystem;
-    public float fillSpeed = 0.5f;
+    public float fillSpeed = 0.2f;
     private float targetProgress = 0;
-    
+    public int level = 1;
+    private int currentExperience = 0;
+    public TMP_Text levelNumber;
     // Start is called before the first frame update
     private void Awake()
     {
         slider = gameObject.GetComponent<Slider>();
-        particleSystem = GameObject.Find("xpBarParticles").GetComponent<ParticleSystem>();
     }
 
     void Start()
     {
-        IncrementProgress(0.75f);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            IncrementExperience(200);
+        }
+       
         if (slider.value < targetProgress)
         {
             slider.value += fillSpeed * Time.deltaTime;
-            if (!particleSystem.isPlaying)
-            {
-                particleSystem.Play();
-            }
         }
-        else
-        {
-            particleSystem.Stop();
-        }
+
+        levelNumber.text = level.ToString();
     }
 
-    public void IncrementProgress(float newProgress)
-    {
-      targetProgress = slider.value+newProgress;
+    public void IncrementExperience(int experience)
+    { 
+        float targetExperience = level * 1000;
+        currentExperience += experience;
+        if (slider.value >= 1.0f)
+        {
+            level++;
+          
+            while (slider.value > 0f)
+            {
+                slider.value -= fillSpeed * Time.deltaTime;
+            }
+        }
+        
+
+        float newProgress = experience / targetExperience;
+        
+        targetProgress = slider.value+newProgress;
+        
     }
 }

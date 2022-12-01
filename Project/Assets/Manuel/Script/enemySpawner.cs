@@ -10,6 +10,7 @@ public class enemySpawner : MonoBehaviour
     //enemy prefab, and the object for the map
     public GameObject enemyPrefab;
     public GameObject gameArea;
+    public GameObject xpOrbs;
     public Transform target;
     public float spawnTime = 2;
     public float spawnDelay = 3;
@@ -100,6 +101,7 @@ public class enemySpawner : MonoBehaviour
         enemyScript.enemySpawner = this; //This just gives it this script, giving them access to one another 
         enemyScript.gameArea = gameArea; //Placing the gameArea(plane) to the enemyPrefab script
         enemyScript.target = target; //This is also needed for the nav mesh, the target is the player prefab 
+        enemyScript.xpOrbs = xpOrbs;
         enemyScript.speed = Random.Range(slowestSpeed, fastestSpeed); //This is the speed range although its probably too fast rn 
 
         return enemyScript;

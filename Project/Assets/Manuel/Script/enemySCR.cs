@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.SubsystemsImplementation;
+using Random = System.Random;
 
 public class enemySCR : MonoBehaviour
 {
     //all of these are elements that are given to the enemySCR through the enemySpawner
     public enemySpawner enemySpawner;
     public GameObject gameArea;
+    public GameObject xpOrbs;
     public Transform target;
     public float enemyCost = 1.0f;
     public int hp = 100; 
@@ -66,6 +68,7 @@ public class enemySCR : MonoBehaviour
     {
         Destroy(gameObject);
         enemySpawner.enemyCount -= 1;
+        spawnXp(); //On death we want to spawn xp 
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -76,6 +79,17 @@ public class enemySCR : MonoBehaviour
         {
             Destroy(gameObject);
             enemySpawner.enemyCount -= 1;
+            spawnXp(); //On death we want to spawn xp 
+        }
+    }
+
+    private void spawnXp()
+    {
+        Random amount = new Random();
+        int fixedValue = amount.Next(2, 3);
+        for(int i = 0; i < fixedValue; i++)
+        {
+            Instantiate(xpOrbs,this.transform.position,Quaternion.identity);
         }
     }
 

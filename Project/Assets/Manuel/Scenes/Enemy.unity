@@ -591,6 +591,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1326348975}
     - target: {fileID: 7781630975826491534, guid: 3f8f5b8f41ab57240a9ce35a8f3a8f1c, type: 3}
+      propertyPath: xpOrbs
+      value: 
+      objectReference: {fileID: 255174554230187770, guid: 93ca25b541679344882d2f2e419f4936, type: 3}
+    - target: {fileID: 7781630975826491534, guid: 3f8f5b8f41ab57240a9ce35a8f3a8f1c, type: 3}
       propertyPath: gameArea
       value: 
       objectReference: {fileID: 461915956}

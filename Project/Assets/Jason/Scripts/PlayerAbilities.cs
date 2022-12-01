@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerAbilities : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class PlayerAbilities : MonoBehaviour
     {
         // Create explosion based on tier level given
         float limiter = 0.50f;
-        GameObject e = Instantiate(explosion, playerT.position, Quaternion.LookRotation(playerT.up), playerT);
+        Vector3 newP = new Vector3(playerT.position.x, playerT.position.y + 1, playerT.position.z);
+        GameObject e = Instantiate(explosion, newP, Quaternion.LookRotation(playerT.up), playerT);
         Vector3 scale =  new Vector3(e.transform.localScale.x * tierLevel * limiter, e.transform.localScale.y * tierLevel * limiter, e.transform.localScale.z);
         e.transform.localScale = scale;
         Destroy(e, 2f);

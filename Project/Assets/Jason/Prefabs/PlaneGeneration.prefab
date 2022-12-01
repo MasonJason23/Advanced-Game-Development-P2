@@ -47,3 +47,6 @@ MonoBehaviour:
   plane: {fileID: 4298076164683141418, guid: ad26c61816d408f408ea8a57e8ec69aa, type: 3}
   player: {fileID: 0}
   parent: {fileID: 2069136858340715202}
+  wall: {fileID: 5692240773560566915, guid: c90b03799dda78f4cb654253e090394a, type: 3}
+  roof: {fileID: 6111264315621491023, guid: aa0b8edc431456e46840f8b85ccacadd, type: 3}
+  updateWallPosTimer: 5

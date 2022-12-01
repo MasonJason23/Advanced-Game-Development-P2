@@ -56,7 +56,8 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        DebugMousePosition();
+        // DebugMousePosition();
+        
         if (Input.GetButtonDown("Fire1"))
         {
             shootingAnimIdelTimer = shootingAnimationIdelTime;

@@ -11,7 +11,7 @@ public class experienceBar: MonoBehaviour
     public float fillSpeed = 0.2f;
     private float targetProgress = 0;
     public int level = 1;
-    private int currentExperience = 0;
+    public int currentExperience = 0;
     public TMP_Text levelNumber;
     // Start is called before the first frame update
     private void Awake()

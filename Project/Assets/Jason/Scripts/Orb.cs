@@ -11,8 +11,8 @@ public class Orb : MonoBehaviour
     public Vector3 relativeDistance = Vector3.zero;
      
     // Use this for initialization
-    void Start () {
-     
+    void Start()
+    {
         if(target != null) 
         {
             relativeDistance = transform.position - target.position;
@@ -31,9 +31,8 @@ public class Orb : MonoBehaviour
         }
     }
      
-    void LateUpdate () {
-         
+    void LateUpdate()
+    {
         Orbit();
-     
     }
 }

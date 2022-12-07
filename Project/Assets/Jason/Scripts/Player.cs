@@ -1,109 +1,62 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Player stats class
-    public class PlayerStats
-    {
-        private int hp;
-        private int shields;
-        private float fireRate;
-        private float movementSpeed;
-        private float critRate;
-        private float critDmg;
-        private float dmgMultiplier;
-
-        private float invincibilityTimer;
-        private float hitTimer;
-        private bool activeInvincibility;
-
-        // Constructor
-        public PlayerStats()
-        {
-            hp = 1;
-            shields = 0;
-            fireRate = 10f;
-            movementSpeed = 10f;
-            critRate = 0f;
-            critDmg = 0.50f;
-            dmgMultiplier = 1f;
-            
-            invincibilityTimer = 3f;
-            hitTimer = invincibilityTimer;
-            activeInvincibility = false;
-        }
-
-        public int getCurrentHP()
-        {
-            return this.hp;
-        }
-
-        public void reduceCurrentHP()
-        {
-            this.hp -= 1;
-        }
-        
-        public bool invincible()
-        {
-            return this.activeInvincibility;
-        }
-        
-        public void activateInvincibility()
-        {
-            activeInvincibility = true;
-        }
-
-        public void reduceInvincibleTimer()
-        {
-            this.hitTimer -= Time.deltaTime;
-            if (this.hitTimer <= 0f)
-            {
-                hitTimer = invincibilityTimer;
-                this.activeInvincibility = false;
-            }
-        }
-    }
-
     // Instance of playerStats
-    private PlayerStats _playerStats;
+    private PlayerStats playerStats;
     
-    // Start is called before the first frame update
-    void Start()
+    // Has to be called in awake since it is referenced by the GameManager
+    void Awake()
     {
-        _playerStats = new PlayerStats();
+        playerStats = new PlayerStats();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_playerStats.invincible())
+        // The Player should have some invincibility frames (iFrames) after taking a hit, assuming the player doesn't die
+        if (playerStats.Invincible())
         {
-            _playerStats.reduceInvincibleTimer();
+            playerStats.ReduceInvincibleTimer();
         }
     }
 
+    // Getter function that can be access from other scripts
+    public PlayerStats GetPlayerStats() => playerStats;
+    
+    // Player takes damage via a collision with it's rigidbody
     private void OnCollisionEnter(Collision collision)
     {
-        if (_playerStats.invincible())
+        // Player still has some iFrames active
+        if (playerStats.Invincible())
         {
             return;
         }
         
+        // Checks to make sure the collision is from the enemy
         if (collision.gameObject.name.Equals("Enemy"))
         {
-            if (_playerStats.getCurrentHP() <= 0)
+            if (playerStats.GetCurrentHp() <= 0)
             {
-                // Deactivating player game object (Temporary solution)
+                // Deactivating player game object (Temporary solution to player death)
                 gameObject.SetActive(false);
             }
             else
             {
-                _playerStats.reduceCurrentHP();
-                _playerStats.activateInvincibility();
+                // Player takes damage, upon surviving, iFrames are activated
+                playerStats.ReduceCurrentHp();
+                playerStats.ActivateInvincibility();
             }
+        }
+    }
+
+    // This is how the player will obtain xp
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Xp"))
+        {
+            Debug.Log("Exp gained");
+            playerStats.IncrementExp(200);
         }
     }
 }

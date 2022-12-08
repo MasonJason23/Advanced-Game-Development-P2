@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 // This script allows each ability, with a collider, to interact with the enemies.
 public class AbilityDamager : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem hitEffect;
+
     // Damage variable
     public int damage;
 
@@ -11,6 +14,13 @@ public class AbilityDamager : MonoBehaviour
     {
         if (other.gameObject.transform.tag.Equals("Enemy"))
         {
+            if (hitEffect)
+            {
+                var o = other.gameObject;
+                ParticleSystem efx = Instantiate(hitEffect, o.transform.position, Quaternion.identity, o.transform);
+                efx.Play();
+                Destroy(efx, 5f);
+            }
             other.gameObject.GetComponent<enemySCR>().takeDamage(damage);
         }
     }

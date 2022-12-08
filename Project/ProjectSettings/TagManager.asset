@@ -9,6 +9,7 @@ TagManager:
   - playerBullet
   - Enemy
   - Xp
+  - Ability
   layers:
   - Default
   - TransparentFX

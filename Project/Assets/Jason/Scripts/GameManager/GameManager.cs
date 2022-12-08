@@ -182,13 +182,13 @@ public class GameManager : MonoBehaviour
         // int u3 = Random.Range(0, 11);
         
         // Testing ability upgrades
-        u1 = Random.Range(7, 10);
+        u1 = Random.Range(0, 10);
         
-        u2 = Random.Range(7, 10);
-        while (u2 == u1) u2 = Random.Range(7, 10);
+        u2 = Random.Range(0, 10);
+        while (u2 == u1) u2 = Random.Range(0, 10);
         
-        u3 = Random.Range(7, 10);
-        while (u3 == u1 || u3 == u2) u3 = Random.Range(7, 10);
+        u3 = Random.Range(0, 10);
+        while (u3 == u1 || u3 == u2) u3 = Random.Range(0, 10);
 
         // Bring up upgrade menu whilst pausing the game
         pauseGame();
@@ -244,25 +244,35 @@ public class GameManager : MonoBehaviour
         switch (indicator)
         {
             case(0):
-                return "Hp";
+                return "Hp\n" +
+                       "Take More Hits";
             case(1):
-                return "Shield";
+                return "Shield\n" +
+                       "(Not Available) Reactivates over time";
             case(2):
-                return "FireRate";
+                return "FireRate\n" +
+                       "(Not Available) Increased fire speed";
             case(3):
-                return "MovementSpeed";
+                return "MovementSpeed\n" +
+                       "(Not Available) Increased movement speed";
             case(4):
-                return "CrtRate";
+                return "CrtRate\n" +
+                       "(Not Available) Increased chance of dealing more damage";
             case(5):
-                return "CrtDamage";
+                return "CrtDamage" +
+                       "(Not Available) Increased critical damage";
             case(6):
-                return "DamageMultiplier";
+                return "DamageMultiplier\n" +
+                       "(Not Available) Increased overall damage";
             case(7):
-                return "Explosion";
+                return "Explosion\n" +
+                       "Damage area of effect on cooldown";
             case(8):
-                return "Orbs";
+                return "Orbs\n" +
+                       "Rotating orbs that damages upon touch";
             case(9):
-                return "Aura";
+                return "Aura\n" +
+                       "(Disables Firing) Constant damage in a small space";
             default:
                 Debug.Log("Ability/Stat does not exists");
                 return "NULL";

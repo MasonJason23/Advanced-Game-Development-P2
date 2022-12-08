@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AbilityClass
 {
+    public static bool disableShooting = false;
+    
     /*
      * Each value represents a tier level of the ability, cooldown, damage and max level.
      * Abilities in order:
@@ -13,7 +15,7 @@ public class AbilityClass
     public float[][] abilityStats = {
         new[] { 0, 10f, 25f, 6 },
         new[] { 0, 0f, 10f, 8 },
-        new[] { 0, 1f, 5f, 5 },
+        new[] { 0, 1f, 1f, 5 },
         // new[] { 0, 3f, 15f, 6 }
     };
     private readonly float _upgradeMultiplier;
@@ -104,6 +106,8 @@ public class AbilityClass
     
     private void UpgradeAura()
     {
+        disableShooting = true;
+        
         // Incrementing Tier Level
         abilityStats[2][0] += 1;
         

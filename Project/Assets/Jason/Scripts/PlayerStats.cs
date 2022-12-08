@@ -73,7 +73,7 @@ public class PlayerStats
         if (exp >= maxExp)
         {
             playerLevel += 1;
-            maxExp += playerLevel * 1000;
+            maxExp += playerLevel * playerLevel * 500;
         }
     }
 

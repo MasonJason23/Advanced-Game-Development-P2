@@ -9,10 +9,15 @@ public class Orb : MonoBehaviour
     public float orbitDistance = 10.0f;
     public float orbitDegreesPerSec = 180.0f;
     public Vector3 relativeDistance = Vector3.zero;
+
+    private AudioSource _audioSource;
      
     // Use this for initialization
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.enabled = true;
+
         if(target != null) 
         {
             relativeDistance = transform.position - target.position;
@@ -30,7 +35,12 @@ public class Orb : MonoBehaviour
             relativeDistance = transform.position - target.position;
         }
     }
-     
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.transform.tag.Equals("Enemy")) gameObject.GetComponent<AudioSource>().Play();
+    }
+
     void LateUpdate()
     {
         Orbit();

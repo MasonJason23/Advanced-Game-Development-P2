@@ -31,15 +31,6 @@ public class BasicProjectile : MonoBehaviour
         {
             other.gameObject.GetComponent<enemySCR>().takeDamage(25);
         }
-        Destroy(gameObject);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.transform.tag.Equals("Enemy"))
-        {
-            collision.gameObject.GetComponent<enemySCR>().takeDamage(25);
-        }
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 }

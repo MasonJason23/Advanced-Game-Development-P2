@@ -36,7 +36,9 @@ public class PlayerShooting : MonoBehaviour
         OFF
     };
     private ShootingAnimMode shootingAnimMode;
-    
+
+    [SerializeField] private GameObject shootVFX;
+    [SerializeField] private AudioClip shootSFX;
 
     // Used to move the "debug sphere" game object
     [SerializeField] private Transform debugTransform;
@@ -70,6 +72,11 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
+        if (AbilityClass.disableShooting)
+        {
+            return;
+        }
+        
         Ray ray = mainCamera.ScreenPointToRay(_screenCenterPoint);
         
         if (Input.GetAxisRaw("Horizontal") == 0)
@@ -82,14 +89,27 @@ public class PlayerShooting : MonoBehaviour
         // float.MaxValue, focusLayer)) //ORIGINAL
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue)) //CHANGE HERE
         {
+            GetComponent<AudioSource>().PlayOneShot(shootSFX);
+
+            GameObject vfx = Instantiate(shootVFX, shootingPos);
+            vfx.GetComponentInChildren<ParticleSystem>().Play();
+            Destroy(vfx, 1f);
+            
             Vector3 aimDir = (hit.point - shootingPos.position).normalized;
             Instantiate(projectile, shootingPos.position, 
                 Quaternion.LookRotation(aimDir, Vector3.up));
         }
-        else 
-        {   //added
-             Vector3 tempTransformFoward = mainCamera.transform.forward;
-             Instantiate(projectile, rightHand.position, Quaternion.LookRotation(tempTransformFoward,
+        else
+        {
+            GetComponent<AudioSource>().PlayOneShot(shootSFX);
+            
+            GameObject vfx = Instantiate(shootVFX, shootingPos);
+            vfx.GetComponentInChildren<ParticleSystem>().Play();
+            Destroy(vfx, 1f);
+            
+            //added
+            Vector3 tempTransformFoward = mainCamera.transform.forward;
+            Instantiate(projectile, rightHand.position, Quaternion.LookRotation(tempTransformFoward,
                  mainCamera.transform.up));
         }
     }

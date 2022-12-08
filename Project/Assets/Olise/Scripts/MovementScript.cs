@@ -50,7 +50,7 @@ public class MovementScript : MonoBehaviour
     private Animator animator;
 
     
-
+    [SerializeField] private GameObject jumpBoostEffect;
 
     private void Awake()
     {
@@ -122,9 +122,16 @@ public class MovementScript : MonoBehaviour
             //  For boosting in the x and z direction.(jump Boost)
             if ((horizontalInputVal != 0 || verticalInputVal != 0) && jumpBoostWindow > 0 )
             {
+                GameObject efx = Instantiate(jumpBoostEffect, transform);
+                foreach (var fx in efx.GetComponents<ParticleSystem>())
+                {
+                    fx.Play();
+                }
+                Destroy(efx, 1f);
                 
                 // so it doesn't jump boost forever
-                jumpBoostWindow = 0f; 
+                jumpBoostWindow = 0f;
+                myspeaker.clip = jumpSound;
                 myspeaker.PlayOneShot(jumpSound);
                 rb.AddForce( (new Vector3(moveDir.normalized.x  * jumpBoostForce, 
                     0, moveDir.normalized.z * jumpBoostForce) ), ForceMode.Force );

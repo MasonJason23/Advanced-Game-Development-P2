@@ -13,8 +13,8 @@ public class AbilityClass
     public float[][] abilityStats = {
         new[] { 0, 10f, 25f, 6 },
         new[] { 0, 0f, 10f, 8 },
-        new[] { 0, 0f, 5f, 5 },
-        new[] { 0, 3f, 15f, 6 }
+        new[] { 0, 1f, 5f, 5 },
+        // new[] { 0, 3f, 15f, 6 }
     };
     private readonly float _upgradeMultiplier;
     
@@ -58,19 +58,14 @@ public class AbilityClass
                 UpgradeExplosion();
                 break;
             case (2):
-                // if ((int)abilityStats[1][0] == (int)abilityStats[1][3])
-                // {
-                //     Debug.Log("Orb ability at max level!");
-                //     break;
-                // }
                 UpgradeOrb();
                 break;
             case (3):
                 UpgradeAura();
                 break;
-            case (4):
-                UpgradeLighting();
-                break;
+            // case (4):
+            //     UpgradeLighting();
+            //     break;
         }
     }
 
@@ -109,11 +104,23 @@ public class AbilityClass
     
     private void UpgradeAura()
     {
-        Debug.Log("Implement aura ability in order to upgrade it!");
+        // Incrementing Tier Level
+        abilityStats[2][0] += 1;
+        
+        a3 = true;
+        // Activating ability if first time getting ability
+        if ((int)abilityStats[2][0] == 1)
+        {
+            return;
+        }
+        
+        // Decreasing cooldown and upgrading damage
+        abilityStats[2][1] *= 0.8f;
+        abilityStats[2][2] += abilityStats[2][2] * _upgradeMultiplier;
     }
     
-    private void UpgradeLighting()
-    {
-        Debug.Log("Implement lighting ability in order to upgrade it!");
-    }
+    // private void UpgradeLighting()
+    // {
+    //     Debug.Log("Implement lighting ability in order to upgrade it!");
+    // }
 }

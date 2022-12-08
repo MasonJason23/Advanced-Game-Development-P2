@@ -3,6 +3,48 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    // From Olise's GameManager
+    [SerializeField] private GameObject levelUpScreen;
+    public static bool isGamePaused = false;
+    private UpgradeUIManager _upgradeUIManager;
+    
+    private int u1;
+    private int u2;
+    private int u3;
+
+    private string u1str;
+    private string u2str;
+    private string u3str;
+
+    public void pauseGame()
+    {
+        u1str = TranslateNumToAbility(u1);
+        u2str = TranslateNumToAbility(u2);
+        u3str = TranslateNumToAbility(u3);
+        
+        _upgradeUIManager.ChangeCardName(1, u1str);
+        _upgradeUIManager.ChangeCardName(2, u2str);
+        _upgradeUIManager.ChangeCardName(3, u3str);
+        
+        levelUpScreen.SetActive(true);
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        isGamePaused = true;
+    }
+    
+    public void playGame()
+    {
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        levelUpScreen.SetActive(false);
+        isGamePaused = false;
+    }
+    
+    // -------------------------------------------------------------
+    
+    // Jason's GameManager Code
     // Reference to the player game object
     [SerializeField] private GameObject player;
 
@@ -23,12 +65,12 @@ public class GameManager : MonoBehaviour
     private int _currentPlayerLevel;
     
     // Check to see if the game is still ongoing or ended
-    private enum GamePhase
+    public enum GamePhase
     {
         Alive,
         Dead
     }
-    private GamePhase _isPlayerAlive;
+    public static GamePhase _isPlayerAlive;
     
     private void Start()
     {
@@ -41,14 +83,21 @@ public class GameManager : MonoBehaviour
         
         _isPlayerAlive = GamePhase.Alive;
         _currentPlayerLevel = _playerStats.GetPlayerLevel();
+
+        _upgradeUIManager = GetComponent<UpgradeUIManager>();
     }
 
     private void Update()
     {
+        if(Input.GetKey(KeyCode.U)) 
+        {
+            pauseGame();
+        }
+        
         // Condition to check when the run is finished (player dies)
         if (_isPlayerAlive == GamePhase.Dead)
         {
-            // End Game Here
+            // End Game Here (DYLAN!
             return;
         }
         
@@ -90,6 +139,12 @@ public class GameManager : MonoBehaviour
             PlayerAbilities.Orb(player.transform, (int)_abilityClass.abilityStats[1][0], (int)_abilityClass.abilityStats[1][2]);
             _abilityClass.a2 = false;
         }
+        
+        if (_abilityClass.a3)
+        {
+            PlayerAbilities.Aura(player.transform, (int)_abilityClass.abilityStats[2][0], (int)_abilityClass.abilityStats[2][2], _abilityClass.abilityStats[2][1]);
+            _abilityClass.a3 = false;
+        }
     }
 
     // This function checks if the player leveled up or not
@@ -127,25 +182,18 @@ public class GameManager : MonoBehaviour
         // int u3 = Random.Range(0, 11);
         
         // Testing ability upgrades
-        int u1 = Random.Range(7, 11);
-        int u2 = Random.Range(7, 11);
-        int u3 = Random.Range(7, 11);
+        u1 = Random.Range(7, 10);
+        
+        u2 = Random.Range(7, 10);
+        while (u2 == u1) u2 = Random.Range(7, 10);
+        
+        u3 = Random.Range(7, 10);
+        while (u3 == u1 || u3 == u2) u3 = Random.Range(7, 10);
 
-        // Choosing an upgrade for the player
-        int chosenUpgrade = Random.Range(1, 4);
-        // Based on the chosen upgrade, proceed with the upgrade process
-        switch (chosenUpgrade)
-        {
-            case(1):
-                Upgrade(u1);
-                break;
-            case(2):
-                Upgrade(u2);
-                break;
-            case(3):
-                Upgrade(u3);
-                break;
-        }
+        // Bring up upgrade menu whilst pausing the game
+        pauseGame();
+        
+        // ChooseButton() function will unpause the game
     }
 
     // The Upgrade() function doesn't do any upgrading but instead distinguishes
@@ -168,6 +216,56 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             // Do something here
+        }
+    }
+
+    // Upgrade button
+    public void ChooseButton(int indicator)
+    {
+        // Based on the chosen upgrade, proceed with the upgrade process
+        switch (indicator)
+        {
+            case(1):
+                Upgrade(u1);
+                break;
+            case(2):
+                Upgrade(u2);
+                break;
+            case(3):
+                Upgrade(u3);
+                break;
+        }
+        
+        playGame();
+    }
+
+    public string TranslateNumToAbility(int indicator)
+    {
+        switch (indicator)
+        {
+            case(0):
+                return "Hp";
+            case(1):
+                return "Shield";
+            case(2):
+                return "FireRate";
+            case(3):
+                return "MovementSpeed";
+            case(4):
+                return "CrtRate";
+            case(5):
+                return "CrtDamage";
+            case(6):
+                return "DamageMultiplier";
+            case(7):
+                return "Explosion";
+            case(8):
+                return "Orbs";
+            case(9):
+                return "Aura";
+            default:
+                Debug.Log("Ability/Stat does not exists");
+                return "NULL";
         }
     }
 }

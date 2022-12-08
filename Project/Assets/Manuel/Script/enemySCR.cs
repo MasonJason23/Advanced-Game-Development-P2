@@ -89,6 +89,7 @@ public class enemySCR : MonoBehaviour
 
     public void takeDamage(int value)
     {
+        Debug.Log("Taking Damage");
         if (hp - value <= 0)
         {
             RemoveEnemy();

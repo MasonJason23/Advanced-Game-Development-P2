@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
             {
                 // Deactivating player game object (Temporary solution to player death)
                 gameObject.SetActive(false);
+                GameManager._isPlayerAlive = GameManager.GamePhase.Dead;
             }
             else
             {

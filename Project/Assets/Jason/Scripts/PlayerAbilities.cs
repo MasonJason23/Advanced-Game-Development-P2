@@ -6,9 +6,11 @@ public class PlayerAbilities : MonoBehaviour
     // Reference to the ability game objects
     public GameObject explosion;
     public GameObject orbs;
+    public GameObject aura;
     
     // Reference to the orb ability when activated for the first time
     private GameObject activeOrbs;
+    private GameObject activeAura;
 
     // The explosion game object (ability) is created here
     public void Explosion(Transform playerT, int tierLevel, int dmg)
@@ -65,13 +67,22 @@ public class PlayerAbilities : MonoBehaviour
         }
     }
 
-    public void Aura(Transform playerT, float tierLevel)
+    public void Aura(Transform playerT, int tierLevel, int dmg, float cd)
     {
         // Create a dmg over time aura effect based on tier level
+        if (tierLevel == 1)
+        {
+            activeAura = Instantiate(aura, playerT.position, Quaternion.LookRotation(playerT.up), playerT);
+        }
+        else
+        {
+            activeAura.GetComponent<AbilityDamager2>().damage = dmg;
+            activeAura.GetComponent<AbilityDamager2>().cooldown = cd;
+        }
     }
 
-    public void Lighting(Transform playerT, float tierLevel)
-    {
-        // Create some sort of lighting ability based on tier level
-    }
+    // public void Lighting(Transform playerT, float tierLevel)
+    // {
+    //     // Create some sort of lighting ability based on tier level
+    // }
 }

@@ -18,6 +18,7 @@ public class PlayerStats
     private float invincibilityTimer;
     private float hitTimer;
     private bool activeInvincibility;
+    
 
     // Constructor
     public PlayerStats()

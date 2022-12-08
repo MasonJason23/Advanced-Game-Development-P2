@@ -73,7 +73,7 @@ public class MovementScript : MonoBehaviour
 
         if (timer >= time)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !GameManager.isGamePaused)
             {
 
                 // set JumBuffer Window time

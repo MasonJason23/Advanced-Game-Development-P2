@@ -15,8 +15,9 @@ public class PlayerShooting : MonoBehaviour
     // [SerializeField] private Transform playerTransform;
     // Reference to projectile game object
     [SerializeField] private GameObject projectile;
-    [SerializeField] private Transform projectileSpawnPosition;
-    [SerializeField] private GameObject shootingPointGameObject;
+    [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform leftHand;
+    private Transform shootingPos;
 
     //=========== added ========================
     
@@ -30,8 +31,7 @@ public class PlayerShooting : MonoBehaviour
     private Animator animator;
     enum ShootingAnimMode 
     {
-        //helps to move the arm for the
-        //capsule model.
+        //helps to move the arm while shooting
         ON,
         OFF
     };
@@ -50,20 +50,22 @@ public class PlayerShooting : MonoBehaviour
         animator = GetComponent<Animator>(); //added
         
         shootLayerId = animator.GetLayerIndex("Shooting Mode");
-        RegularLayerId = animator.GetLayerIndex("Base Layer");
         shootingAnimMode = ShootingAnimMode.OFF;
     }
 
     void Update()
     {
-        DebugMousePosition();
-        if (Input.GetButtonDown("Fire1"))
+        if (!GameManager.isGamePaused)
         {
-            shootingAnimIdelTimer = shootingAnimationIdelTime;
-            Shoot();
+            DebugMousePosition();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                shootingAnimIdelTimer = shootingAnimationIdelTime;
+                Shoot();
+            }
+
+            HandelShootingAnimationModes();
         }
-        
-        HandelShootingAnimationModes();
 
     }
 
@@ -76,20 +78,35 @@ public class PlayerShooting : MonoBehaviour
             animator.SetTrigger("attack");
         }
         
+        ChooseShootPosition();
         // if (Physics.Raycast(ray, out RaycastHit hit,
         // float.MaxValue, focusLayer)) //ORIGINAL
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue)) //CHANGE HERE
         {
-            Vector3 aimDir = (hit.point - projectileSpawnPosition.position).normalized;
-            Instantiate(projectile, projectileSpawnPosition.position, 
+            Vector3 aimDir = (hit.point - shootingPos.position).normalized;
+            Instantiate(projectile, shootingPos.position, 
                 Quaternion.LookRotation(aimDir, Vector3.up));
         }
         else 
         {   //added
              Vector3 tempTransformFoward = mainCamera.transform.forward;
-             Instantiate(projectile, projectileSpawnPosition.position, Quaternion.LookRotation(tempTransformFoward,
+             Instantiate(projectile, rightHand.position, Quaternion.LookRotation(tempTransformFoward,
                  mainCamera.transform.up));
         }
+    }
+
+    private void ChooseShootPosition()
+    {
+        Transform shootingPosition = rightHand;
+        //it can be the left or right hand
+        float horizontalInputVal = Input.GetAxisRaw("Horizontal"); 
+        
+            if (horizontalInputVal < 0)
+            {
+                shootingPosition = leftHand;
+            }
+
+            shootingPos = shootingPosition;
     }
 
     // This function places a debug game object wherever the mouse position is located

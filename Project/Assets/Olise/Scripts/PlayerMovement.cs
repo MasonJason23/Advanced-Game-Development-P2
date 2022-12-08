@@ -14,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 boxsize; // the (x,y,z) size of the the box cast
     public float maxDistance; // how far from the canter is the box placed
     public LayerMask LayerMask;
-    
-    
+    public List<int> gg = new List<int>();
+    public Dictionary<int, string> div = new Dictionary<int, String>();
+
     //######## NOTE: please make sure every plane in you scene has a layer called Ground so that
     //## that the jump will work.
 
@@ -23,9 +24,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // var gg = div[1];
     }
 
-
+    // bool jj(int )
+    // {
+    //     
+    // }
     // private void OnDrawGizmos() // used to show the box in the scene view
     // {
     //     Gizmos.color = Color.red;
@@ -34,18 +39,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        
+            horizontalInput = Input.GetAxis("Horizontal"); 
+            verticalInput = Input.GetAxis("Vertical");
 
-        rb.velocity = new Vector3(horizontalInput * movementSpeed, rb.velocity.y, verticalInput * movementSpeed);
-
-        if (Input.GetButtonDown("Jump") && GroundCheck())
-        {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-        }
+            rb.velocity = new Vector3(horizontalInput * movementSpeed, rb.velocity.y, verticalInput * movementSpeed);
+            
+            if (Input.GetButtonDown("Jump") && GroundCheck()&& !GameManager.isGamePaused) 
+            { 
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z); 
+            }
     }
-
-    
 
     bool GroundCheck()
     {

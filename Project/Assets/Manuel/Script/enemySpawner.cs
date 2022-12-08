@@ -73,7 +73,7 @@ public class enemySpawner : MonoBehaviour
         Vector3 position = Random.insideUnitCircle.normalized; //This will push enemies to the edge of the circle, later on may add some random number to move them either closer to further from the edge of the circle.
 
         //This makes there spawning be on y axis of 0 but there z position is equal to the random value we normalized 
-        position = new Vector3(position.x, .10f, position.y);
+        position = new Vector3(position.x, .15f, position.y);
         
         //this will be used later so enemies just spawn in the camera view, so even in fog we can spawn enimies that aren't too far away! 
         if(withinCamera == false)
